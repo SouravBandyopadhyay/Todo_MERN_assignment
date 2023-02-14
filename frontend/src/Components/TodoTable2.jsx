@@ -1,108 +1,41 @@
 import React, { useEffect, useState } from "react";
-import { Table, Tag, Space, Tooltip, Button } from "antd";
-import moment from "moment";
-import { FaTrashAlt } from "react-icons/fa";
-import ModifyComponent from "./ModifyComponent";
+import { Button, Table, Tag } from "antd";
 import Search from "antd/es/transfer/search";
 import { columns } from "./Columns.jsx";
 export function renderColor(status) {
   switch (status) {
     case "open":
-      return <Tag color="green">OPEN</Tag>;
+      return (
+        <Tag color="green">
+          <strong>OPEN</strong>
+        </Tag>
+      );
     case "working":
-      return <Tag color="yellow">WORKING</Tag>;
+      return (
+        <Tag color="yellow">
+          <strong>WORKING</strong>
+        </Tag>
+      );
     case "done":
-      return <Tag color="orange">DONE</Tag>;
+      return (
+        <Tag color="orange">
+          <strong>DONE</strong>
+        </Tag>
+      );
     case "overdue":
-      return <Tag color="red">OVERDUE</Tag>;
+      return (
+        <Tag color="red">
+          <strong>OVERDUE</strong>
+        </Tag>
+      );
     default:
-      return <Tag color="warning">Invalid </Tag>;
+      return (
+        <Tag color="warning">
+          <strong>Invalid </strong>
+        </Tag>
+      );
   }
 }
-// const columns = [
-//   {
-//     title: "ID",
-//     dataIndex: "id",
-//     key: "id",
-//     sorter: (a, b) => a.id - b.id,
-//   },
-//   {
-//     title: "Timestamp",
-//     dataIndex: "timstamp",
-//     key: "timstamp",
-//     sorter: (a, b) => a.timestamp - b.timestamp,
-//     render: (text) => moment(text).format("YYYY-MM-DD HH:mm:ss"),
-//   },
-//   {
-//     title: "Title",
-//     dataIndex: "title",
-//     key: "title",
-//     sorter: (a, b) => a.title.localeCompare(b.title),
-//   },
-//   {
-//     title: "Description",
-//     dataIndex: "description",
-//     key: "description",
-//     sorter: (a, b) => a.description.localeCompare(b.description),
-//   },
-//   {
-//     title: "Due Date",
-//     dataIndex: "dueDate",
-//     key: "dueDate",
-//     sorter: (a, b) => a.description.localeCompare(b.description),
-//   },
-//   {
-//     title: "Status",
-//     dataIndex: "status",
-//     key: "status",
-//     render: (status) => <>{renderColor(status)}</>,
-//     filters: [
-//       {
-//         text: "OPEN",
-//         value: "open",
-//       },
-//       {
-//         text: "WORKING",
-//         value: "working",
-//       },
-//       {
-//         text: "DONE",
-//         value: "done",
-//       },
-//       {
-//         text: "OVERDUE",
-//         value: "overdue",
-//       },
-//     ],
-//     onFilter: (value, record) => record.status === value,
-//   },
-//   {
-//     title: "Action",
-//     key: "action",
-//     render: ({ id, title, tag, dueDate, status }) => (
-//       <Space size="middle">
-//         <Tooltip title="Delete">
-//           <Button
-//             onClick={() => deleteHandle(id)}
-//             type="primary"
-//             danger
-//             shape="circle"
-//             icon={<FaTrashAlt />}
-//           />
-//         </Tooltip>
-//         <Tooltip title="Modify">
-//           <ModifyComponent
-//             id={id}
-//             status={status}
-//             dueDate={dueDate}
-//             title={title}
-//             tag={tag}
-//           />
-//         </Tooltip>
-//       </Space>
-//     ),
-//   },
-// ];
 
 const TableWithSorting = () => {
   const [data, setData] = useState([]);
@@ -162,7 +95,7 @@ const TableWithSorting = () => {
 
   useEffect(() => {
     fetchApi();
-  }, [filteredData]);
+  }, []);
   return (
     <Table
       dataSource={paginatedData.length === 0 ? filteredData : paginatedData}
@@ -175,9 +108,9 @@ const TableWithSorting = () => {
       title={() => searchInput}
       footer={() =>
         searchText && (
-          <button type="button" onClick={handleReset}>
+          <Button onClick={handleReset} type="primary" ghost htmlType="submit">
             Reset Search
-          </button>
+          </Button>
         )
       }
     />

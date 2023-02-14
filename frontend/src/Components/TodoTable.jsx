@@ -142,3 +142,81 @@ const TodoTable = () => {
 };
 
 export default TodoTable;
+
+[
+  {
+    id: 1,
+    title: "Task 1",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    dueDate: "2023-02-28T08:00:00.000Z",
+    tag: ["High", "Urgent"],
+    status: "open",
+    timestamp: Date.now(),
+  },
+  {
+    id: 2,
+    title: "Task 2",
+    description:
+      "Vestibulum malesuada interdum nulla, id bibendum orci maximus non.",
+    dueDate: "2023-03-10T08:00:00.000Z",
+    tag: ["Medium", "Important"],
+    status: "open",
+    timestamp: Date.now(),
+  },
+  {
+    id: 3,
+    title: "Task 3",
+    description:
+      "Sed consequat, mauris sit amet hendrerit tincidunt, nibh quam malesuada massa, quis eleifend risus mauris id arcu.",
+    dueDate: "2023-03-15T08:00:00.000Z",
+    tag: ["Low", "Urgent"],
+    status: "open",
+    timestamp: Date.now(),
+  },
+  {
+    id: 4,
+    title: "Task 4",
+    description: "Suspendisse nec eros in nunc bibendum malesuada.",
+    dueDate: "2023-03-20T08:00:00.000Z",
+    tag: ["High", "Important"],
+    status: "open",
+    timestamp: Date.now(),
+  },
+  {
+    id: 5,
+    title: "Task 5",
+    description:
+      "Praesent feugiat, velit nec laoreet lobortis, velit velit mattis risus, et rutrum metus odio eu dolor.",
+    dueDate: "2023-03-25T08:00:00.000Z",
+    tag: ["Medium"],
+    status: "open",
+    timestamp: Date.now(),
+  },
+  {
+    id: 6,
+    title: "Task 6",
+    description: "Mauris non eros elit.",
+    dueDate: "2023-03-30T08:00:00.000Z",
+    tag: ["Low", "Important"],
+    status: "open",
+    timestamp: Date.now(),
+  },
+  {
+    id: 7,
+    title: "Task 7",
+    description: "In ut consectetur massa.",
+    dueDate: "2023-04-05T08:00:00.000Z",
+    tag: ["High"],
+    status: "open",
+    timestamp: Date.now(),
+  },
+  {
+    id: 8,
+    title: "Task 8",
+    description: "Vivamus non sapien non odio consequat consequat eu eu velit.",
+    dueDate: "2023-04-10T08:00:00.000Z",
+    tag: ["Medium", "Important"],
+    status: "open",
+    timestamp: Date.now(),
+  },
+];

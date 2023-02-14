@@ -39,15 +39,20 @@ const FormComponent = () => {
       style={{
         maxWidth: 600,
         margin: "auto",
-        // border: "2px solid red",
+
         justifyContent: "center",
       }}
       autoComplete="off"
     >
-      <Form.Item name="note" label="Task Name" rules={[{ required: true }]}>
+      <Form.Item
+        name="note"
+        label="Task Name"
+        rules={[{ required: true }]}
+        wrapperCol={{ offset: 1, span: 15 }}
+      >
         <Input
-          name="title" //key
-          value={task.name} //value
+          name="title"
+          value={task.name}
           onChange={handleChange}
           type="text"
           placeholder="Task Name"
@@ -57,18 +62,23 @@ const FormComponent = () => {
         name="description"
         label="Task Description"
         rules={[{ required: true }]}
+        wrapperCol={{ offset: 1, span: 15 }}
       >
         <TextArea
           showCount
           maxLength={1000}
-          style={{ height: 50, resize: "true" }}
-          name="description" //key
-          value={task.name} //value
+          style={{ height: 40, resize: "true" }}
+          name="description"
+          value={task.name}
           onChange={handleChange}
-          placeholder="disable resize"
+          placeholder="Todo Description"
         />
       </Form.Item>
-      <Form.Item name="dueDate" label="Choose Due Date">
+      <Form.Item
+        name="dueDate"
+        label="Choose Due Date"
+        wrapperCol={{ offset: 1, span: 15 }}
+      >
         <Input
           type="date"
           name="dueDate"
@@ -76,11 +86,15 @@ const FormComponent = () => {
           onChange={handleChange}
         />
       </Form.Item>
-      <Form.Item name="tag" label="Choose Associated Tags">
+      <Form.Item
+        name="tag"
+        label="Choose Associated Tags"
+        wrapperCol={{ offset: 1, span: 15 }}
+      >
         <Input name="tag" value={task.name} onChange={handleChange} />
       </Form.Item>
       <Form.Item {...tailLayout}>
-        <Button onClick={handleClick} type="primary" htmlType="submit">
+        <Button onClick={handleClick} type="primary" ghost htmlType="submit">
           Submit
         </Button>
       </Form.Item>

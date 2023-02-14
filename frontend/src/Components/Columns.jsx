@@ -3,6 +3,7 @@ import moment from "moment";
 import { FaTrashAlt } from "react-icons/fa";
 import ModifyComponent from "./ModifyComponent";
 import { renderColor } from "./TodoTable2";
+import { deleteHandle } from "./Delete";
 export const columns = [
   {
     title: "ID",
@@ -14,7 +15,7 @@ export const columns = [
     title: "Timestamp",
     dataIndex: "timstamp",
     key: "timstamp",
-    sorter: (a, b) => a.timestamp - b.timestamp,
+    sorter: (a, b) => a.timstamp - b.timstamp,
     render: (text) => moment(text).format("YYYY-MM-DD HH:mm:ss"),
   },
   {
@@ -33,7 +34,7 @@ export const columns = [
     title: "Due Date",
     dataIndex: "dueDate",
     key: "dueDate",
-    sorter: (a, b) => a.description.localeCompare(b.description),
+    sorter: (a, b) => a.dueDate.localeCompare(b.dueDate),
   },
   {
     title: "Status",
