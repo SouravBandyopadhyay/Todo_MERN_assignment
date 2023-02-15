@@ -3,12 +3,17 @@ import FormComponent from "./Components/Form";
 
 import TableWithSorting from "./Components/TodoTable2";
 import { Typography } from "antd";
-const { Text, Title } = Typography;
+const { Title } = Typography;
 const Page = () => {
   return (
     <div>
-      <Title>To-Do List App</Title>
+      <Title strong italic>
+        ToDo List App
+      </Title>
       <FormComponent />
+      <Title strong italic level={2}>
+        ToDo List Table
+      </Title>
       <TableWithSorting />
     </div>
   );

@@ -41,7 +41,7 @@ export function renderColor(status) {
 const TableWithSorting = () => {
   const [data, setData] = useState([]);
   const fetchApi = async () => {
-    let res = await fetch("http://localhost:8000/tasks");
+    let res = await fetch("https://algobulls-backend.onrender.com/tasks");
     let fetchedData = res.json();
     fetchedData
       .then((res) => {
@@ -107,6 +107,11 @@ const TableWithSorting = () => {
 
   return (
     <Table
+      style={{
+        padding: 10,
+        margin: "auto",
+        justifyContent: "center",
+      }}
       rowKey={(record) => record.id}
       dataSource={filteredData}
       columns={columns}

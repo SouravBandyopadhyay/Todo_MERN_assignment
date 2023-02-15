@@ -2,13 +2,12 @@ import React, { useState } from "react";
 import { Button, Modal, Form, Input, Select, Space } from "antd";
 import { FaExternalLinkAlt } from "react-icons/fa";
 
-const ModifyComponent = ({ id, title, tag, dueDate, status }) => {
+const ModifyComponent = ({ id, title, duedate, status }) => {
   const [open, setOpen] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
 
   const [newTitle, setTitle] = useState(title);
-  // const [newtag, setNewtag] = useState(tag);
-  const [newDate, setNewdate] = useState(dueDate);
+  const [newDate, setNewdate] = useState(duedate);
   const [newStatus, setNewstatus] = useState(status);
 
   const showModal = () => {
@@ -31,18 +30,20 @@ const ModifyComponent = ({ id, title, tag, dueDate, status }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await fetch(`http://localhost:8000/tasks/${id}`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          title: newTitle,
-          // tag: tag + "," + newtag,
-          dueDate: newDate,
-          status: newStatus,
-        }),
-      });
+      const response = await fetch(
+        `https://algobulls-backend.onrender.com/tasks/${id}`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            title: newTitle,
+            dueDate: newDate,
+            status: newStatus,
+          }),
+        }
+      );
       const updatedUser = await response.json();
       console.log(updatedUser);
     } catch (error) {

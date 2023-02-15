@@ -1,16 +1,6 @@
-import { Form, Input, Tag, Button } from "antd";
+import { Form, Input, Tag, Button, notification } from "antd";
 import { useState } from "react";
 import axios from "axios";
-
-const layout = {
-  labelCol: { span: 8 },
-  wrapperCol: { span: 16 },
-};
-const tailLayout = {
-  wrapperCol: { offset: 8, span: 16 },
-};
-
-const { TextArea } = Input;
 
 const TodoForm = () => {
   const [form] = Form.useForm();
@@ -32,8 +22,13 @@ const TodoForm = () => {
 
   const handleSubmit = (values) => {
     const postTask = { ...values, tags, status: "open", timstamp: Date.now() };
-    console.log(postTask);
-    axios.post("http://localhost:8000/tasks", postTask);
+    // console.log(postTask);
+    axios.post("https://algobulls-backend.onrender.com/tasks", postTask);
+    notification.open({
+      message: "Todo Added",
+      description:
+        "Todo and its content has been added refresh to see changes.",
+    });
   };
 
   return (
@@ -43,9 +38,12 @@ const TodoForm = () => {
       layout="vertical"
       name="control-ref"
       style={{
-        maxWidth: 600,
+        maxWidth: 500,
         margin: "auto",
         justifyContent: "center",
+        backgroundColor:"#ECF2FF",
+        padding:5,
+        borderRadius:"0.5rem"
       }}
       autoComplete="off"
     >
@@ -83,7 +81,7 @@ const TodoForm = () => {
       >
         <div>
           {tags.map((tag) => (
-            <Tag key={tag} closable onClose={() => handleTagClose(tag)}>
+            <Tag key={tag} style={{margin:"auto",marginBottom:"10px"}} color="magenta" closable onClose={() => handleTagClose(tag)}>
               {tag}
             </Tag>
           ))}
@@ -93,10 +91,10 @@ const TodoForm = () => {
           onChange={(e) => setTagInputValue(e.target.value)}
           onPressEnter={handleTagAdd}
         />
-        <Button onClick={handleTagAdd}>Add tag</Button>
+        <Button style={{marginTop:10}} onClick={handleTagAdd}>Add tag</Button>
       </Form.Item>
       <Form.Item>
-        <Button type="primary" htmlType="submit" disabled={hovering}>
+        <Button block type="primary" htmlType="submit" disabled={hovering}>
           Save
         </Button>
       </Form.Item>

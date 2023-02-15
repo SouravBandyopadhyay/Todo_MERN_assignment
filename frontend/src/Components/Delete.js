@@ -1,7 +1,7 @@
 import { Alert } from "antd";
 export async function deleteHandle(id) {
   const res = await fetch(
-    `http://localhost:8000/tasks${id}`,
+    `https://algobulls-backend.onrender.com/tasks/${id}`,
     {
       method: "DELETE",
       headers: {
@@ -12,9 +12,9 @@ export async function deleteHandle(id) {
   const deletedData = res.json();
   deletedData
     .then((res) => {
-      alert("done");
+      window.location.reload();
     })
     .catch((err) => {
-      alert("err");
+      console.log(err);
     });
 }
