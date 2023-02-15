@@ -1,6 +1,7 @@
-import React, { useRef, useState } from "react";
-import { Button, Form, Input, Select, DatePicker } from "antd";
+import { Form, Input, Tag, Button } from "antd";
+import { useState } from "react";
 import axios from "axios";
+
 const layout = {
   labelCol: { span: 8 },
   wrapperCol: { span: 16 },
@@ -10,96 +11,97 @@ const tailLayout = {
 };
 
 const { TextArea } = Input;
-const FormComponent = () => {
-  const initialData = {
-    title: "", // title of task
-    description: "", //description
-    dueDate: "", //due date
-    tag: ["todo"], // tags user can add (Optional)
-    status: "open", // by default it is open
-    timstamp: Date.now(),
-  };
-  const [task, setTask] = useState(initialData);
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setTask((elem) => ({
-      ...elem,
-      [name]: value,
-    }));
+
+const TodoForm = () => {
+  const [form] = Form.useForm();
+  const [tags, setTags] = useState([]);
+  const [tagInputValue, setTagInputValue] = useState("");
+  const [hovering, setHovering] = useState(false);
+  const handleTagClose = (removedTag) => {
+    const newTags = tags.filter((tag) => tag !== removedTag);
+    setTags(newTags);
   };
 
-  const handleClick = (e) => {
-    e.preventDefault();
-    axios.post("https://json-practice-api.onrender.com/userDetails", task);
+  const handleTagAdd = () => {
+    if (tagInputValue && !tags.includes(tagInputValue)) {
+      const newTags = [...tags, tagInputValue];
+      setTags(newTags);
+      setTagInputValue("");
+    }
   };
+
+  const handleSubmit = (values) => {
+    const postTask = { ...values, tags, status: "open", timstamp: Date.now() };
+    console.log(postTask);
+    axios.post("http://localhost:8000/tasks", postTask);
+  };
+
   return (
     <Form
-      {...layout}
+      form={form}
+      onFinish={handleSubmit}
+      layout="vertical"
       name="control-ref"
       style={{
         maxWidth: 600,
         margin: "auto",
-
         justifyContent: "center",
       }}
       autoComplete="off"
     >
       <Form.Item
-        name="note"
-        label="Task Name"
-        rules={[{ required: true }]}
-        wrapperCol={{ offset: 1, span: 15 }}
+        name="title"
+        label="Title"
+        rules={[{ required: true, message: "Please enter a title" }]}
       >
-        <Input
-          name="title"
-          value={task.name}
-          onChange={handleChange}
-          type="text"
-          placeholder="Task Name"
-        />
+        <Input />
+      </Form.Item>
+      <Form.Item
+        name="duedate"
+        label="Due Date"
+        rules={[{ required: true, message: "Please select a date" }]}
+      >
+        <Input type="date" name="dueDate" />
       </Form.Item>
       <Form.Item
         name="description"
-        label="Task Description"
-        rules={[{ required: true }]}
-        wrapperCol={{ offset: 1, span: 15 }}
+        label="Description"
+        rules={[{ required: true, message: "Please enter a description" }]}
       >
-        <TextArea
+        <Input.TextArea
           showCount
           maxLength={1000}
           style={{ height: 40, resize: "true" }}
-          name="description"
-          value={task.name}
-          onChange={handleChange}
           placeholder="Todo Description"
         />
       </Form.Item>
       <Form.Item
-        name="dueDate"
-        label="Choose Due Date"
-        wrapperCol={{ offset: 1, span: 15 }}
+        name="tags"
+        label="Tags"
+        onMouseEnter={() => setHovering(true)}
+        onMouseLeave={() => setHovering(false)}
       >
+        <div>
+          {tags.map((tag) => (
+            <Tag key={tag} closable onClose={() => handleTagClose(tag)}>
+              {tag}
+            </Tag>
+          ))}
+        </div>
         <Input
-          type="date"
-          name="dueDate"
-          value={task.name}
-          onChange={handleChange}
+          value={tagInputValue}
+          onChange={(e) => setTagInputValue(e.target.value)}
+          onPressEnter={handleTagAdd}
         />
+        <Button onClick={handleTagAdd}>Add tag</Button>
       </Form.Item>
-      <Form.Item
-        name="tag"
-        label="Choose Associated Tags"
-        wrapperCol={{ offset: 1, span: 15 }}
-      >
-        <Input name="tag" value={task.name} onChange={handleChange} />
-      </Form.Item>
-      <Form.Item {...tailLayout}>
-        <Button onClick={handleClick} type="primary" ghost htmlType="submit">
-          Submit
+      <Form.Item>
+        <Button type="primary" htmlType="submit" disabled={hovering}>
+          Save
         </Button>
       </Form.Item>
     </Form>
   );
 };
 
-export default FormComponent;
+export default TodoForm;

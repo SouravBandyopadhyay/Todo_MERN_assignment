@@ -31,21 +31,18 @@ const ModifyComponent = ({ id, title, tag, dueDate, status }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await fetch(
-        `https://json-practice-api.onrender.com/userDetails/${id}`,
-        {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            title: newTitle,
-            // tag: tag + "," + newtag,
-            dueDate: newDate,
-            status: newStatus,
-          }),
-        }
-      );
+      const response = await fetch(`http://localhost:8000/tasks/${id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          title: newTitle,
+          // tag: tag + "," + newtag,
+          dueDate: newDate,
+          status: newStatus,
+        }),
+      });
       const updatedUser = await response.json();
       console.log(updatedUser);
     } catch (error) {
@@ -94,15 +91,7 @@ const ModifyComponent = ({ id, title, tag, dueDate, status }) => {
               onChange={(event) => setNewdate(event.target.value)}
             />
           </Form.Item>
-          {/* <Form.Item name="tag" label="Tags" rules={[{ required: true }]}>
-            <Input
-              name="tag" //key
-              type="text"
-              placeholder={tag.trim().toUpperCase().split(",")}
-              onChange={(event) => setNewtag(event.target.value.split(","))}
-              value={newtag}
-            />
-          </Form.Item> */}
+
           <Form.Item name="status" label="Status">
             <Space wrap>
               <Select

@@ -1,7 +1,7 @@
 import { Alert } from "antd";
 export async function deleteHandle(id) {
   const res = await fetch(
-    `https://json-practice-api.onrender.com/userDetails/${id}`,
+    `http://localhost:8000/tasks${id}`,
     {
       method: "DELETE",
       headers: {

@@ -1,1 +1,49 @@
-{}
+{
+  "tasks": [
+    {
+      "title": "Watch Anime",
+      "duedate": "2023-02-17",
+      "description": "Watch Anime Boruto and One Piece online.",
+      "tags": ["anime", "cartoon", "relax"],
+      "status": "open",
+      "timstamp": 1676474340441,
+      "id": 1
+    },
+    {
+      "title": "Party",
+      "duedate": "2023-02-25",
+      "description": "Office party at DLF Cyberhub with friends.",
+      "tags": ["party", "nightout", "social"],
+      "status": "open",
+      "timstamp": 1676474500959,
+      "id": 2
+    },
+    {
+      "title": "Birthday ",
+      "duedate": "2023-03-07",
+      "description": "My birthday so I have to visit parents' place. ",
+      "tags": ["birthday", "enjoy"],
+      "status": "open",
+      "timstamp": 1676474616327,
+      "id": 3
+    },
+    {
+      "title": "Client Meeting",
+      "duedate": "2023-03-09",
+      "description": "Client Meeting with Jack where I lead the presentation.",
+      "tags": ["reactjs", "presentation"],
+      "status": "open",
+      "timstamp": 1676474684915,
+      "id": 4
+    },
+    {
+      "title": "Movie To Watch",
+      "duedate": "2023-02-18",
+      "description": "Have to watch Pathaan film.",
+      "tags": ["film", "movie"],
+      "status": "open",
+      "timstamp": 1676474821046,
+      "id": 5
+    }
+  ]
+}

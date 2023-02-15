@@ -1,4 +1,4 @@
-import { Button, Space, Tooltip } from "antd";
+import { Button, Space, Tag, Tooltip } from "antd";
 import moment from "moment";
 import { FaTrashAlt } from "react-icons/fa";
 import ModifyComponent from "./ModifyComponent";
@@ -32,9 +32,21 @@ export const columns = [
   },
   {
     title: "Due Date",
-    dataIndex: "dueDate",
-    key: "dueDate",
-    sorter: (a, b) => a.dueDate.localeCompare(b.dueDate),
+    dataIndex: "duedate",
+    key: "duedate",
+    sorter: (a, b) => a.duedate.localeCompare(b.duedate),
+  },
+  {
+    title: "Tags",
+    dataIndex: "tags",
+    key: "tags",
+    render: (tags) => (
+      <>
+        {tags.map((el) => (
+          <Tag>{el}</Tag>
+        ))}
+      </>
+    ),
   },
   {
     title: "Status",

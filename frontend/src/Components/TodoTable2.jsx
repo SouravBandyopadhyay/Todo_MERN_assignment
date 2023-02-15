@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Button, Table, Tag } from "antd";
 import Search from "antd/es/transfer/search";
 import { columns } from "./Columns.jsx";
+
 export function renderColor(status) {
   switch (status) {
     case "open":
@@ -40,7 +41,7 @@ export function renderColor(status) {
 const TableWithSorting = () => {
   const [data, setData] = useState([]);
   const fetchApi = async () => {
-    let res = await fetch("https://json-practice-api.onrender.com/userDetails");
+    let res = await fetch("http://localhost:8000/tasks");
     let fetchedData = res.json();
     fetchedData
       .then((res) => {
@@ -52,25 +53,31 @@ const TableWithSorting = () => {
       });
   };
 
-  // ----------------
   const [sortedInfo, setSortedInfo] = useState({});
   const [filteredInfo, setFilteredInfo] = useState({});
   const [searchText, setSearchText] = useState("");
-  const [pagination, setPagination] = useState({ current: 1, pageSize: 10 });
+  const [pagination, setPagination] = useState({
+    current: 1,
+    pageSize: 10,
+    total: data.length,
+  });
+
   const handleChange = (pagination, filters, sorter) => {
     setSortedInfo(sorter);
     setFilteredInfo(filters);
-    setPagination(pagination);
+    setPagination({ ...pagination, total: filteredData.length });
   };
+
   const handleSearch = (e) => {
     setSearchText(e.target.value);
-    setPagination({ current: 1, pageSize: 10 });
+    setPagination({ current: 1, pageSize: 10, total: filteredData.length });
   };
 
   const handleReset = () => {
     setSearchText("");
-    setPagination({ current: 1, pageSize: 10 });
+    setPagination({ current: 1, pageSize: 10, total: data.length });
   };
+
   const searchInput = (
     <Search
       placeholder="Search"
@@ -80,6 +87,7 @@ const TableWithSorting = () => {
       onSearch={() => console.log("Searched!")}
     />
   );
+
   const filteredData = searchText
     ? data.filter((record) =>
         Object.values(record).some((value) =>
@@ -96,12 +104,19 @@ const TableWithSorting = () => {
   useEffect(() => {
     fetchApi();
   }, []);
+
   return (
     <Table
-      dataSource={paginatedData.length === 0 ? filteredData : paginatedData}
+      rowKey={(record) => record.id}
+      dataSource={filteredData}
       columns={columns}
       onChange={handleChange}
-      pagination={true}
+      pagination={{
+        pageSize: 10,
+        total: filteredData.length,
+        current: pagination.current,
+        onChange: (page) => setPagination({ ...pagination, current: page }),
+      }}
       sortDirections={["ascend", "descend", "ascend"]}
       size="small"
       bordered
