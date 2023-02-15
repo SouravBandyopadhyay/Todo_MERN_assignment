@@ -2,7 +2,7 @@ import { Button, Popconfirm, Space, Tag, Tooltip } from "antd";
 import moment from "moment";
 import { FaTrashAlt } from "react-icons/fa";
 import ModifyComponent from "./ModifyComponent";
-import { renderColor } from "./TodoTable2";
+import { renderColor } from "./TodoTable";
 import { deleteHandle } from "./Delete";
 export const columns = [
   {

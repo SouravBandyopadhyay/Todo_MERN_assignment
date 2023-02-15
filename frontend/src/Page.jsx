@@ -1,7 +1,7 @@
 import React from "react";
 import FormComponent from "./Components/Form";
 
-import TableWithSorting from "./Components/TodoTable2";
+import TableWithSorting from "./Components/TodoTable";
 import { Typography } from "antd";
 const { Title } = Typography;
 const Page = () => {
